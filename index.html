@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<script>
+
+function add() {
+var form = document.querySelector("#ajaxForm");
+ var   data = {
+          monthlyIncome : form.querySelector('input[name="monthlyIncome"]').value,
+          tcIdentity : form.querySelector('input[name="tcIdentity"]').value
+     
+        }
+
+    $.ajax({
+        type: "PUT",
+        url:  "http://localhost:8096/creditscores/creditscore",
+        contentType: "application/json; charset=utf-8",
+        datatype: "json",
+
+		headers: {
+        "Accept": "application/json",
+	    "user": "user",
+	    "password": "user"
+        },
+        
+         data: JSON.stringify(data),
+        success: function (msg) {
+            alert("ok");
+        }
+    });
+}
+</script>
+</head>
+
+<style>
+
+body {
+background-color: #d24dff
+}
+</style>
+
+<body>
+
+<div class="well">
+   <form accept-charset="UTF-8" method="POST" target="_blank" id="ajaxForm">
+    <div class="form-group">
+      <label for="tcIdentity">T.C. Kimlik Numarasi : </label>
+      <input class="form-control" type="text" name="tcIdentity" placeholder="TC Kimlik Numaranizi Giriniz">
+    </div>
+    <div class="form-group">
+      <label for="name">Ad : </label>
+      <input class="form-control" type="text" name="name" placeholder="Isiminizi Giriniz">
+    </div>
+    <div class="form-group">
+      <label for="surname">Soyad :</label>
+      <input class="form-control" type="text" name="surname" placeholder="Soyadinizi Giriniz">
+    </div>
+ <div class="form-group">
+      <label for="monthlyIncome">Aylik Gelir :</label>
+      <input class="form-control" type="text" name="monthlyIncome" placeholder="Aylik Gelirinizi Giriniz">
+    </div>
+<div class="form-group">
+      <label for="phoneNumber">Telefon Numarasi : </label>
+      <input class="form-control" type="text" name="phoneNumber" placeholder="Telefon numaranizi Giriniz">
+    </div>	
+     <input type='Button' value='Calculate Limit' OnClick='add()'/>
+  
+  </form>
+</div>
+
+</body>
+
+
+</html>
